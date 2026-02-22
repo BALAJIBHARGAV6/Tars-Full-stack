@@ -18,11 +18,17 @@ import { ConvexProviderWithClerk } from "convex/react-clerk";
 import { ConvexReactClient } from "convex/react";
 import { ReactNode } from "react";
 
-// Create a single Convex client instance
-// NEXT_PUBLIC_ prefix means this variable is available in the browser
-const convex = new ConvexReactClient(
-  process.env.NEXT_PUBLIC_CONVEX_URL as string
-);
+// Lazy-init Convex client to avoid crash during build-time SSG
+// when NEXT_PUBLIC_CONVEX_URL is not yet available
+let convex: ConvexReactClient | null = null;
+function getConvexClient() {
+  if (!convex) {
+    convex = new ConvexReactClient(
+      process.env.NEXT_PUBLIC_CONVEX_URL as string
+    );
+  }
+  return convex;
+}
 
 // Provider component that wraps the entire app
 export default function ConvexClientProvider({
@@ -37,7 +43,7 @@ export default function ConvexClientProvider({
     >
       {/* ConvexProviderWithClerk: Connects Convex to Clerk
           so that Convex functions can access the authenticated user */}
-      <ConvexProviderWithClerk client={convex} useAuth={useAuth}>
+      <ConvexProviderWithClerk client={getConvexClient()} useAuth={useAuth}>
         {children}
       </ConvexProviderWithClerk>
     </ClerkProvider>

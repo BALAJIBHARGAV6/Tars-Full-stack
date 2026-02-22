@@ -29,6 +29,9 @@ const playfair = Playfair_Display({
   variable: "--font-display",
 });
 
+// Force dynamic rendering - the app needs runtime env vars (Convex, Clerk)
+export const dynamic = "force-dynamic";
+
 // Metadata for SEO
 export const metadata: Metadata = {
   title: "Tars Chat - Real-time Messaging",
