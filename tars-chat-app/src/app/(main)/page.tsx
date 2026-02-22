@@ -154,7 +154,7 @@ export default function HomePage() {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="relative z-10 w-72 h-72 sm:w-[400px] sm:h-[400px] lg:w-[500px] lg:h-[500px] mb-4 sm:mb-6"
+          className="relative z-10 w-72 h-72 sm:w-[420px] sm:h-[420px] lg:w-[580px] lg:h-[580px] mb-4 sm:mb-6"
         >
           <div
             className="absolute inset-[-40%] rounded-full bg-gradient-to-br from-violet-400/15 via-purple-400/8 to-emerald-400/8 blur-[80px]"
@@ -175,9 +175,9 @@ export default function HomePage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-          className="relative z-10 text-center mb-6 px-2"
+          className="relative z-10 text-center mb-8 px-2"
         >
-          <h1 className="font-display text-3xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white leading-[1.15] tracking-tight">
+          <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white leading-[1.15] tracking-tight">
             Where chats
             <br />
             <span className="gradient-text">come alive</span>
@@ -190,41 +190,16 @@ export default function HomePage() {
           </p>
         </motion.div>
 
-        {/* Inline mini stats */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.25 }}
-          className="relative z-10 flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-8 px-2"
-        >
-          {[
-            { icon: Zap, value: "Instant", label: "Delivery" },
-            { icon: Shield, value: "Secure", label: "Always" },
-            { icon: Globe, value: "Online", label: "24/7" },
-          ].map((stat, i) => (
-            <div
-              key={i}
-              className="flex items-center gap-2 rounded-full bg-white/80 dark:bg-slate-800/90 backdrop-blur-xl border border-white/60 dark:border-violet-500/20 px-3 sm:px-3.5 py-1.5 sm:py-2 shadow-sm dark:shadow-violet-900/20"
-            >
-              <stat.icon className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-violet-500 dark:text-violet-400" />
-              <div className="flex items-baseline gap-1">
-                <span className="text-[11px] sm:text-xs font-bold text-slate-800 dark:text-white">{stat.value}</span>
-                <span className="text-[9px] sm:text-[10px] text-slate-400 dark:text-slate-500">{stat.label}</span>
-              </div>
-            </div>
-          ))}
-        </motion.div>
-
         {/* CTA Buttons */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
-          className="relative z-10 flex flex-col sm:flex-row items-center gap-3 w-full max-w-md px-4"
+          className="relative z-10 flex flex-col sm:flex-row items-center gap-4 sm:gap-6 w-full max-w-lg px-4"
         >
           <button
             onClick={() => setShowUsers(true)}
-            className="group relative flex w-full sm:w-auto items-center justify-center gap-2.5 rounded-2xl bg-gradient-to-r from-violet-600 via-purple-600 to-violet-700 px-8 py-3.5 sm:py-4 text-sm font-semibold text-white shadow-2xl shadow-violet-500/30 hover:shadow-violet-500/50 active:scale-[0.97] transition-all duration-200 overflow-hidden"
+            className="group relative flex w-full sm:w-auto items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-violet-600 via-purple-600 to-violet-700 px-10 py-4 text-sm font-semibold text-white shadow-2xl shadow-violet-500/30 hover:shadow-violet-500/50 active:scale-[0.97] transition-all duration-200 overflow-hidden"
           >
             {/* Shimmer overlay */}
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
@@ -235,10 +210,10 @@ export default function HomePage() {
 
           <Link
             href="/"
-            className="group flex w-full sm:w-auto items-center justify-center gap-2.5 rounded-2xl border border-slate-200/60 dark:border-slate-700/40 bg-white/40 dark:bg-slate-800/40 backdrop-blur-xl px-8 py-3.5 sm:py-4 text-sm font-semibold text-slate-700 dark:text-slate-200 hover:border-violet-300/60 dark:hover:border-violet-600/40 hover:bg-white/60 dark:hover:bg-slate-800/60 hover:shadow-xl active:scale-[0.97] transition-all duration-200"
+            className="group flex w-full sm:w-auto items-center justify-center gap-3 rounded-2xl border-2 border-slate-200 dark:border-violet-500/30 bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl px-10 py-4 text-sm font-semibold text-slate-700 dark:text-slate-200 hover:border-violet-400 dark:hover:border-violet-500/60 hover:bg-white dark:hover:bg-slate-800 hover:shadow-xl hover:shadow-violet-500/10 active:scale-[0.97] transition-all duration-200"
           >
             <MessageCircle className="h-4 w-4" />
-            My Messages
+            <span>My Messages</span>
             {totalUnread && totalUnread > 0 && (
               <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-gradient-to-r from-red-500 to-pink-500 px-1.5 text-[10px] font-bold text-white shadow-sm shadow-red-500/20">
                 {totalUnread}
@@ -472,23 +447,23 @@ export default function HomePage() {
       </section>
 
       {/* ========= FOOTER — distinct background ========= */}
-      <footer className="bg-slate-900 dark:bg-slate-950 px-4 sm:px-6 py-10 sm:py-14">
+      <footer className="bg-slate-100 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 px-4 sm:px-6 py-10 sm:py-14">
         <div className="max-w-5xl mx-auto">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-5">
             <div className="flex items-center gap-2.5">
               <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 shadow-lg shadow-violet-500/30">
                 <MessageCircle className="h-3.5 w-3.5 text-white" />
               </div>
-              <span className="font-display text-base font-bold text-white">
+              <span className="font-display text-base font-bold text-slate-800 dark:text-white">
                 Tars Chat
               </span>
             </div>
 
             <div className="flex flex-col items-center sm:items-end gap-1">
-              <p className="font-sans text-xs text-slate-400 tracking-wider uppercase font-semibold">
+              <p className="font-sans text-xs text-slate-600 dark:text-slate-400 tracking-wider uppercase font-semibold">
                 Developed By Tars
               </p>
-              <p className="font-sans text-[10px] text-slate-500">
+              <p className="font-sans text-[10px] text-slate-500 dark:text-slate-500">
                 © {new Date().getFullYear()} Tars Messaging Platform
               </p>
             </div>
