@@ -51,7 +51,7 @@ export default function HomePage() {
   // Discover Users View - Premium Redesign
   if (showUsers) {
     return (
-      <div className="flex flex-1 flex-col overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
+      <div className="flex flex-1 flex-col overflow-hidden gradient-bg-hero">
         {/* Ambient background effects */}
         <div className="fixed inset-0 pointer-events-none overflow-hidden">
           <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-violet-300/20 dark:bg-violet-500/10 rounded-full blur-[150px]" />
@@ -83,75 +83,48 @@ export default function HomePage() {
         <div className="flex-1 overflow-y-auto custom-scrollbar relative z-10">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
             
+            {/* Lottie Animation - Big Size */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              className="relative z-10 w-56 h-56 sm:w-72 sm:h-72 lg:w-96 lg:h-96 mx-auto mb-6"
+            >
+              <div
+                className="absolute inset-[-40%] rounded-full bg-gradient-to-br from-violet-400/15 via-purple-400/8 to-emerald-400/8 blur-[80px]"
+                style={{ animation: "pulse 6s ease-in-out infinite" }}
+              />
+              <div className="relative w-full h-full drop-shadow-2xl">
+                <DotLottieReact
+                  src="https://lottie.host/59f5c75b-3a65-437e-9bad-1aa8785709b7/1jVgovl86G.lottie"
+                  loop
+                  autoplay
+                  style={{ width: "100%", height: "100%" }}
+                />
+              </div>
+            </motion.div>
+
             {/* Hero Header Section */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="text-center mb-12"
+              className="text-center mb-10"
             >
-              {/* Back Button */}
-              <motion.button
-                onClick={() => setShowUsers(false)}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center gap-2 mb-8 px-5 py-2.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors text-sm font-medium"
-              >
-                <ArrowRight className="h-4 w-4 rotate-180" />
-                Back to Home
-              </motion.button>
-
-              {/* Icon with floating animation */}
-              <motion.div
-                animate={{ y: [0, -8, 0] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                className="inline-flex h-20 w-20 sm:h-24 sm:w-24 items-center justify-center rounded-3xl bg-gradient-to-br from-violet-500 via-purple-500 to-violet-600 shadow-2xl shadow-violet-500/30 mb-6"
-              >
-                <Users className="h-10 w-10 sm:h-12 sm:w-12 text-white" />
-              </motion.div>
-
               <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 dark:text-white mb-4 tracking-tight">
                 Discover <span className="gradient-text">People</span>
               </h1>
               <p className="font-sans text-base sm:text-lg text-slate-500 dark:text-slate-400 max-w-md mx-auto">
-                Find amazing people and start meaningful conversations
+                Find amazing people and start <span className="text-violet-600 dark:text-violet-400 font-semibold">meaningful</span> conversations
               </p>
-            </motion.div>
-
-            {/* Stats Row */}
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="flex flex-wrap justify-center gap-4 sm:gap-6 mb-12"
-            >
-              {[
-                { icon: Users, label: "Active Users", value: "100+" },
-                { icon: Zap, label: "Instant Connect", value: "0ms" },
-                { icon: Shield, label: "Secure Chats", value: "100%" },
-              ].map((stat, i) => (
-                <motion.div
-                  key={i}
-                  whileHover={{ y: -4, scale: 1.02 }}
-                  className="flex items-center gap-3 px-5 py-3 rounded-2xl bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-lg transition-all"
-                >
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-violet-100 dark:bg-violet-900/40">
-                    <stat.icon className="h-5 w-5 text-violet-600 dark:text-violet-400" />
-                  </div>
-                  <div>
-                    <p className="text-lg font-bold text-slate-900 dark:text-white">{stat.value}</p>
-                    <p className="text-xs text-slate-500 dark:text-slate-400">{stat.label}</p>
-                  </div>
-                </motion.div>
-              ))}
             </motion.div>
 
             {/* User List with enhanced styling */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="bg-white dark:bg-slate-800/50 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-xl shadow-slate-200/50 dark:shadow-black/20 p-6 sm:p-8"
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="bg-white/80 dark:bg-slate-800/60 backdrop-blur-xl rounded-3xl border border-slate-200/80 dark:border-slate-700/50 shadow-xl shadow-slate-200/50 dark:shadow-black/20 p-6 sm:p-8"
             >
               <UserList />
             </motion.div>
@@ -215,7 +188,7 @@ export default function HomePage() {
       </div>
 
       {/* ========= HERO SECTION ========= */}
-      <section className="relative flex flex-col items-center justify-center px-4 sm:px-6 pt-4 pb-12 sm:pt-6 sm:pb-16 min-h-[calc(100dvh-72px)] overflow-hidden">
+      <section className="relative flex flex-col items-center justify-center px-4 sm:px-6 pt-4 pb-12 sm:pt-6 sm:pb-16 min-h-[calc(100dvh-72px)] overflow-hidden gradient-bg-hero">
         {/* Ambient background */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <div className="absolute top-[10%] left-[5%] w-[500px] h-[500px] bg-violet-400/15 dark:bg-violet-500/20 rounded-full blur-[120px]" />
@@ -260,9 +233,9 @@ export default function HomePage() {
           className="relative z-10 text-center mb-8 px-2"
         >
           <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white leading-[1.15] tracking-tight">
-            <span className="gradient-text">Tars</span> — Where chats
+            <span className="gradient-text">Tars</span> — Where <span className="gradient-text">chats</span>
             <br />
-            come alive
+            come <span className="text-emerald-500 dark:text-emerald-400">alive</span>
           </h1>
           <p className="font-sans text-sm sm:text-base lg:text-lg text-slate-500 dark:text-slate-400 max-w-md mx-auto mt-4 sm:mt-5 leading-relaxed">
             The messaging platform built for those who appreciate
@@ -272,34 +245,33 @@ export default function HomePage() {
           </p>
         </motion.div>
 
-        {/* CTA Buttons - Elegant Classical Style */}
+        {/* CTA Buttons - Gradient Style */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
-          className="relative z-10 flex flex-col sm:flex-row items-center gap-5 sm:gap-8 w-full max-w-xl px-4"
+          className="relative z-10 flex flex-col sm:flex-row items-center gap-4 sm:gap-5 w-full max-w-md px-4"
         >
           {/* Primary Button - Discover People */}
           <button
             onClick={() => setShowUsers(true)}
-            className="group relative flex w-full sm:w-auto items-center justify-center gap-4 rounded-full bg-slate-900 dark:bg-white px-12 py-5 text-base font-medium text-white dark:text-slate-900 shadow-2xl shadow-slate-900/20 dark:shadow-white/10 hover:shadow-slate-900/30 dark:hover:shadow-white/20 active:scale-[0.98] transition-all duration-300 overflow-hidden"
+            className="group relative flex w-full sm:w-auto items-center justify-center gap-2.5 rounded-2xl bg-gradient-to-r from-violet-600 via-purple-600 to-violet-700 px-8 py-3.5 text-sm font-semibold text-white shadow-xl shadow-violet-500/25 hover:shadow-violet-500/40 active:scale-[0.97] transition-all duration-200 overflow-hidden"
           >
-            {/* Elegant shine effect */}
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-            <Users className="h-5 w-5 relative z-10" />
-            <span className="relative z-10 tracking-wide">Discover People</span>
-            <ArrowRight className="h-5 w-5 relative z-10 group-hover:translate-x-1 transition-transform duration-300" />
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+            <Users className="h-4 w-4 relative z-10" />
+            <span className="relative z-10">Discover People</span>
+            <ArrowRight className="h-4 w-4 relative z-10 group-hover:translate-x-0.5 transition-transform" />
           </button>
 
           {/* Secondary Button - My Messages */}
           <Link
             href="/"
-            className="group flex w-full sm:w-auto items-center justify-center gap-4 rounded-full border-2 border-slate-300 dark:border-slate-600 bg-transparent px-12 py-5 text-base font-medium text-slate-800 dark:text-slate-200 hover:border-slate-900 dark:hover:border-white hover:bg-slate-50 dark:hover:bg-slate-800/50 active:scale-[0.98] transition-all duration-300"
+            className="group flex w-full sm:w-auto items-center justify-center gap-2.5 rounded-2xl border-2 border-slate-200 dark:border-slate-600 bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl px-8 py-3.5 text-sm font-semibold text-slate-700 dark:text-slate-200 hover:border-violet-400 dark:hover:border-violet-500 hover:bg-white dark:hover:bg-slate-800 hover:shadow-lg active:scale-[0.97] transition-all duration-200"
           >
-            <MessageCircle className="h-5 w-5" />
-            <span className="tracking-wide">My Messages</span>
+            <MessageCircle className="h-4 w-4" />
+            <span>My Messages</span>
             {totalUnread && totalUnread > 0 && (
-              <span className="flex h-6 min-w-6 items-center justify-center rounded-full bg-violet-600 dark:bg-violet-500 px-2 text-xs font-bold text-white">
+              <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-gradient-to-r from-violet-500 to-purple-500 px-1.5 text-[10px] font-bold text-white">
                 {totalUnread}
               </span>
             )}

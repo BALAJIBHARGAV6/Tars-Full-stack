@@ -41,13 +41,13 @@ export default function UserSearch({ onSearch }: UserSearchProps) {
   return (
     <div className="relative">
       {/* Search icon on the left side of the input */}
-      <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+      <Search className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400 dark:text-slate-500" />
       <Input
         type="text"
         placeholder="Search users..."
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        className="pl-10 pr-10 bg-white border-slate-200 focus-visible:ring-violet-500"
+        className="pl-10 pr-10 h-11 rounded-xl bg-slate-50 dark:bg-slate-800/80 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus-visible:ring-2 focus-visible:ring-violet-500 dark:focus-visible:ring-violet-400 focus-visible:border-violet-300 dark:focus-visible:border-violet-600 transition-all"
       />
       {/* Clear button - only shows when there's text */}
       {query && (
@@ -56,7 +56,7 @@ export default function UserSearch({ onSearch }: UserSearchProps) {
             setQuery("");
             onSearch("");
           }}
-          className="absolute right-3 top-1/2 -translate-y-1/2 rounded p-0.5 text-slate-400 transition-colors hover:text-slate-600"
+          className="absolute right-3 top-1/2 -translate-y-1/2 rounded-lg p-1 text-slate-400 dark:text-slate-500 transition-colors hover:text-slate-600 dark:hover:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700"
         >
           <X className="h-4 w-4" />
         </button>
