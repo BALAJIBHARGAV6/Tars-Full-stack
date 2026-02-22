@@ -42,7 +42,7 @@ export default function TypingIndicator({
       >
         {/* Small avatar of the typing user with story ring */}
         <div className="rounded-full bg-gradient-to-tr from-amber-400 via-pink-500 to-violet-600 p-0.5 shrink-0">
-          <div className="rounded-full bg-white p-0.5">
+          <div className="rounded-full bg-white dark:bg-slate-900 p-0.5">
             <Avatar className="h-6 w-6">
               <AvatarImage
                 src={typingUsers[0].avatarUrl}

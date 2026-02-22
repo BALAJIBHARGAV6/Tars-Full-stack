@@ -58,7 +58,7 @@ export default function ChatHeader({
 
   return (
     <div className="flex items-center gap-3 sm:gap-4 border-b border-slate-200/60 dark:border-slate-700/60 bg-white/95 dark:bg-slate-900/95 px-3 sm:px-5 py-3 sm:py-4 backdrop-blur-lg">
-      {/* Back button - visible only on mobile */}
+      {/* Back button - visible on all screen sizes */}
       <MobileBackButton />
 
       {/* Avatar with social media story ring for online users */}

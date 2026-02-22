@@ -163,10 +163,10 @@ export default function MessageInput({
         <button
           onClick={() => setShowEmojis(!showEmojis)}
           className={cn(
-            "flex h-10 w-10 shrink-0 items-center justify-center rounded-full transition-all duration-200",
+            "flex h-11 w-11 shrink-0 items-center justify-center rounded-full transition-all duration-200",
             showEmojis
-              ? "text-violet-500 dark:text-violet-400 bg-violet-50 dark:bg-violet-900/30 ring-2 ring-violet-200 dark:ring-violet-700"
-              : "text-slate-500 dark:text-slate-300 hover:text-violet-500 dark:hover:text-violet-400 hover:bg-slate-100 dark:hover:bg-slate-800 bg-slate-50 dark:bg-slate-800"
+              ? "text-violet-500 dark:text-violet-400 bg-violet-100 dark:bg-violet-900/40 ring-2 ring-violet-300 dark:ring-violet-600"
+              : "text-slate-600 dark:text-slate-200 bg-slate-100 dark:bg-slate-700 hover:text-violet-500 dark:hover:text-violet-400 hover:bg-violet-50 dark:hover:bg-slate-600"
           )}
           title="Emojis"
         >
