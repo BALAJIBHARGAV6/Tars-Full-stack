@@ -136,9 +136,9 @@ export default function HomePage() {
       <section className="relative flex flex-col items-center justify-center px-4 sm:px-6 pt-4 pb-12 sm:pt-6 sm:pb-16 min-h-[calc(100dvh-72px)] overflow-hidden">
         {/* Ambient background */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute top-[10%] left-[5%] w-[500px] h-[500px] bg-violet-400/10 dark:bg-violet-500/6 rounded-full blur-[120px]" />
-          <div className="absolute bottom-[10%] right-[5%] w-[600px] h-[600px] bg-purple-400/8 dark:bg-purple-500/5 rounded-full blur-[140px]" />
-          <div className="absolute top-[40%] left-[50%] -translate-x-1/2 w-[400px] h-[400px] bg-emerald-400/5 dark:bg-emerald-500/3 rounded-full blur-[100px]" />
+          <div className="absolute top-[10%] left-[5%] w-[500px] h-[500px] bg-violet-400/15 dark:bg-violet-500/20 rounded-full blur-[120px]" />
+          <div className="absolute bottom-[10%] right-[5%] w-[600px] h-[600px] bg-purple-400/12 dark:bg-purple-500/15 rounded-full blur-[140px]" />
+          <div className="absolute top-[40%] left-[50%] -translate-x-1/2 w-[400px] h-[400px] bg-emerald-400/8 dark:bg-emerald-500/10 rounded-full blur-[100px]" />
           {/* Dot grid */}
           <div
             className="absolute inset-0 opacity-[0.02] dark:opacity-[0.04]"
@@ -154,7 +154,7 @@ export default function HomePage() {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="relative z-10 w-56 h-56 sm:w-80 sm:h-80 lg:w-96 lg:h-96 mb-4 sm:mb-6"
+          className="relative z-10 w-72 h-72 sm:w-[400px] sm:h-[400px] lg:w-[500px] lg:h-[500px] mb-4 sm:mb-6"
         >
           <div
             className="absolute inset-[-40%] rounded-full bg-gradient-to-br from-violet-400/15 via-purple-400/8 to-emerald-400/8 blur-[80px]"
@@ -204,7 +204,7 @@ export default function HomePage() {
           ].map((stat, i) => (
             <div
               key={i}
-              className="flex items-center gap-2 rounded-full bg-white/70 dark:bg-slate-800/70 backdrop-blur-xl border border-white/50 dark:border-slate-600/40 px-3 sm:px-3.5 py-1.5 sm:py-2 shadow-sm"
+              className="flex items-center gap-2 rounded-full bg-white/80 dark:bg-slate-800/90 backdrop-blur-xl border border-white/60 dark:border-violet-500/20 px-3 sm:px-3.5 py-1.5 sm:py-2 shadow-sm dark:shadow-violet-900/20"
             >
               <stat.icon className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-violet-500 dark:text-violet-400" />
               <div className="flex items-baseline gap-1">
@@ -352,7 +352,7 @@ export default function HomePage() {
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ delay: i * 0.06, ease: [0.16, 1, 0.3, 1] }}
                 className={cn(
-                  "glow-card group rounded-2xl bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl p-7 sm:p-8 hover:-translate-y-2 transition-all duration-300 shadow-sm hover:shadow-2xl border border-white/50 dark:border-slate-700/50 hover:border-violet-200/50 dark:hover:border-violet-700/40",
+                  "glow-card group rounded-2xl bg-white/70 dark:bg-slate-800/80 backdrop-blur-xl p-7 sm:p-8 hover:-translate-y-2 transition-all duration-300 shadow-sm hover:shadow-2xl border border-white/60 dark:border-violet-500/15 hover:border-violet-200/50 dark:hover:border-violet-500/30",
                   feat.glow
                 )}
               >
@@ -386,7 +386,7 @@ export default function HomePage() {
             initial={{ opacity: 0, y: 25 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="glow-card rounded-[2rem] bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl border border-white/50 dark:border-slate-700/50 overflow-hidden shadow-xl dark:shadow-black/30"
+            className="glow-card rounded-[2rem] bg-white/70 dark:bg-slate-800/80 backdrop-blur-xl border border-white/60 dark:border-violet-500/20 overflow-hidden shadow-xl dark:shadow-violet-900/20"
           >
             <div className="grid grid-cols-1 lg:grid-cols-2">
               {/* Left — text side */}
@@ -452,7 +452,7 @@ export default function HomePage() {
                 ].map((stat, i) => (
                   <div
                     key={i}
-                    className="group rounded-2xl bg-white/70 dark:bg-slate-900/60 backdrop-blur-sm border border-white/60 dark:border-slate-600/40 p-4 sm:p-5 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200"
+                    className="group rounded-2xl bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm border border-white/70 dark:border-violet-500/15 p-4 sm:p-5 hover:shadow-lg dark:hover:shadow-violet-900/30 hover:-translate-y-0.5 transition-all duration-200"
                   >
                     <div className={cn("flex h-10 w-10 items-center justify-center rounded-xl mb-3", stat.bg)}>
                       <stat.icon className={cn("h-5 w-5", stat.color)} />

@@ -347,10 +347,10 @@
 
 .dark .glow-navbar::before {
   background: linear-gradient(135deg,
-      rgba(168, 85, 247, 0.6),
-      rgba(139, 92, 246, 0.4),
-      rgba(52, 211, 153, 0.35),
-      rgba(168, 85, 247, 0.6));
+      rgba(168, 85, 247, 0.7),
+      rgba(139, 92, 246, 0.5),
+      rgba(52, 211, 153, 0.45),
+      rgba(168, 85, 247, 0.7));
 }
 
 /* Glowing feature card border */
@@ -385,12 +385,20 @@
       rgba(168, 85, 247, 0.3));
 }
 
+.dark .glow-card::before {
+  background: linear-gradient(135deg,
+      rgba(168, 85, 247, 0.15),
+      rgba(139, 92, 246, 0.08),
+      rgba(52, 211, 153, 0.1),
+      rgba(168, 85, 247, 0.15));
+}
+
 .dark .glow-card:hover::before {
   background: linear-gradient(135deg,
-      rgba(168, 85, 247, 0.4),
-      rgba(139, 92, 246, 0.2),
-      rgba(52, 211, 153, 0.25),
-      rgba(168, 85, 247, 0.4));
+      rgba(168, 85, 247, 0.5),
+      rgba(139, 92, 246, 0.3),
+      rgba(52, 211, 153, 0.35),
+      rgba(168, 85, 247, 0.5));
 }
 
 

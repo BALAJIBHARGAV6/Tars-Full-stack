@@ -9,6 +9,7 @@ A full-stack real-time chat application built with Next.js, Convex, and Clerk.
 - **Group Chats** — Create groups and chat with multiple users at once
 - **Smart Notifications** — Live unread badges and browser tab indicators
 - **Online Presence** — Live online/offline status and typing indicators
+- **Dark/Light Theme** — Beautiful theme toggle with smooth transitions and glassmorphism effects
 - **Secure & Private** — Industry-standard auth via Clerk
 
 ## 🛠 Tech Stack
