@@ -14,13 +14,13 @@ import Link from "next/link";
 import {
   MessageCircle,
   Users,
-  Sparkles,
   ArrowRight,
   Heart,
   Zap,
   Shield,
   Globe,
   Bell,
+  Send,
 } from "lucide-react";
 import { useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
@@ -99,8 +99,8 @@ export default function HomePage() {
         <div className="flex-1 overflow-y-auto">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
             
-            {/* Lottie Animation */}
-            <div className="w-40 h-40 sm:w-52 sm:h-52 mx-auto mb-4">
+            {/* Lottie Animation - Bigger */}
+            <div className="w-52 h-52 sm:w-64 sm:h-64 lg:w-72 lg:h-72 mx-auto mb-6">
               <DotLottieReact
                 src="https://lottie.host/59f5c75b-3a65-437e-9bad-1aa8785709b7/1jVgovl86G.lottie"
                 loop
@@ -126,17 +126,27 @@ export default function HomePage() {
           </div>
 
           {/* Footer */}
-          <footer className="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 px-4 py-8 mt-8">
-            <div className="max-w-3xl mx-auto flex items-center justify-between">
+          <footer className="bg-white dark:bg-slate-900 border-t border-slate-200/60 dark:border-slate-800 px-4 py-5 mt-8">
+            <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+              {/* Left: Brand */}
               <div className="flex items-center gap-2">
-                <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-violet-500 to-purple-600">
+                <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-violet-500 to-purple-600 shadow-md shadow-violet-500/20">
                   <MessageCircle className="h-3.5 w-3.5 text-white" />
                 </div>
-                <span className="font-display text-sm font-bold text-slate-800 dark:text-white">
-                  Tars
-                </span>
+                <span className="font-extrabold text-base bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent">Tars Chat</span>
               </div>
-              <p className="text-xs text-slate-500">© {new Date().getFullYear()} Tars</p>
+              {/* Center: Developed by + Copyright */}
+              <div className="flex flex-col items-center gap-1">
+                <div className="flex items-center gap-1.5 text-sm font-medium text-slate-500 dark:text-slate-400">
+                  <span>Developed with</span>
+                  <Heart className="h-3.5 w-3.5 text-red-500 fill-red-500 animate-pulse" />
+                  <span>by</span>
+                  <span className="font-extrabold bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent">Tars</span>
+                </div>
+                <p className="text-[10px] text-slate-400 dark:text-slate-600">© {new Date().getFullYear()} Tars. All rights reserved.</p>
+              </div>
+              {/* Right: Spacer for desktop symmetry */}
+              <div className="hidden sm:block w-24" />
             </div>
           </footer>
         </div>
@@ -146,10 +156,10 @@ export default function HomePage() {
 
   // ============= MAIN INTERACTION PAGE =============
   return (
-    <div className="flex flex-1 flex-col overflow-y-auto bg-slate-50 dark:bg-slate-950">
+    <div className="flex flex-1 flex-col overflow-y-auto bg-white dark:bg-slate-950">
       {/* Navbar */}
-      <div className="sticky top-0 z-50 flex justify-center px-4 py-3">
-        <nav className="flex items-center justify-between w-full max-w-2xl rounded-full bg-white dark:bg-slate-900 shadow-md border border-slate-200 dark:border-slate-800 px-4 py-2.5">
+      <div className="sticky top-0 z-50 flex justify-center px-4 py-3 bg-white/80 dark:bg-slate-950/80 backdrop-blur-sm">
+        <nav className="flex items-center justify-between w-full max-w-2xl rounded-full bg-white dark:bg-slate-900 shadow-sm border border-slate-200 dark:border-slate-800 px-4 py-2.5">
           <Link href="/" className="flex items-center gap-2.5 pl-0.5">
             <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-violet-500 to-purple-600">
               <MessageCircle className="h-4 w-4 text-white" />
@@ -167,7 +177,7 @@ export default function HomePage() {
       </div>
 
       {/* Hero Section */}
-      <section className="flex flex-col items-center justify-center px-4 pt-8 pb-16 min-h-[calc(100dvh-72px)]">
+      <section className="flex flex-col items-center justify-center px-4 py-12">
         {/* Lottie */}
         <div className="w-56 h-56 sm:w-72 sm:h-72 mb-6">
           <DotLottieReact
@@ -225,53 +235,144 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Features Section - Lightweight */}
-      <section className="px-4 py-16 bg-white dark:bg-slate-900">
-        <div className="max-w-4xl mx-auto">
+      {/* Features Section */}
+      <section className="px-4 py-16 sm:py-20 bg-white dark:bg-slate-950">
+        <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-violet-100 dark:bg-violet-900/30 px-4 py-1.5 text-xs font-semibold text-violet-600 dark:text-violet-400 mb-4">
-              <Sparkles className="h-3.5 w-3.5" />
-              FEATURES
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-3">
-              Everything you need
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white mb-3">
+              Everything you need to
             </h2>
-            <p className="text-sm text-slate-500 dark:text-slate-400">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4">
+              <span className="gradient-text">stay connected</span>
+            </h2>
+            <p className="text-sm sm:text-base text-slate-500 dark:text-slate-400 max-w-lg mx-auto">
               Built for speed, privacy, and a premium experience.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {[
-              { icon: Zap, title: "Real-Time", desc: "Instant message delivery", color: "text-amber-500", bg: "bg-amber-100 dark:bg-amber-900/30" },
-              { icon: Heart, title: "Reactions", desc: "Express with emojis", color: "text-pink-500", bg: "bg-pink-100 dark:bg-pink-900/30" },
-              { icon: Users, title: "Groups", desc: "Chat with everyone", color: "text-violet-500", bg: "bg-violet-100 dark:bg-violet-900/30" },
-              { icon: Bell, title: "Notifications", desc: "Never miss a message", color: "text-blue-500", bg: "bg-blue-100 dark:bg-blue-900/30" },
-              { icon: Shield, title: "Secure", desc: "Privacy first", color: "text-emerald-500", bg: "bg-emerald-100 dark:bg-emerald-900/30" },
-              { icon: Globe, title: "Presence", desc: "See who's online", color: "text-indigo-500", bg: "bg-indigo-100 dark:bg-indigo-900/30" },
-            ].map((f, i) => (
-              <div key={i} className="rounded-xl bg-slate-50 dark:bg-slate-800 p-5 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
-                <div className={cn("flex h-10 w-10 items-center justify-center rounded-lg mb-3", f.bg)}>
-                  <f.icon className={cn("h-5 w-5", f.color)} />
-                </div>
-                <h3 className="text-sm font-semibold text-slate-900 dark:text-white mb-1">{f.title}</h3>
-                <p className="text-xs text-slate-500 dark:text-slate-400">{f.desc}</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* Real-Time Messaging */}
+            <div className="rounded-2xl p-6 bg-amber-50 dark:bg-slate-800 border border-amber-200 dark:border-amber-500/40 shadow-sm hover:shadow-md transition-shadow">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl mb-4 bg-amber-100 dark:bg-amber-500/20">
+                <Zap className="h-6 w-6 text-amber-500" />
               </div>
-            ))}
+              <h3 className="text-base font-semibold text-slate-900 dark:text-white mb-2">Real-Time Messaging</h3>
+              <p className="text-sm text-slate-600 dark:text-slate-400">Messages delivered instantly with zero delay</p>
+            </div>
+
+            {/* Emoji Reactions */}
+            <div className="rounded-2xl p-6 bg-pink-50 dark:bg-slate-800 border border-pink-200 dark:border-pink-500/40 shadow-sm hover:shadow-md transition-shadow">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl mb-4 bg-pink-100 dark:bg-pink-500/20">
+                <Heart className="h-6 w-6 text-pink-500" />
+              </div>
+              <h3 className="text-base font-semibold text-slate-900 dark:text-white mb-2">Emoji Reactions</h3>
+              <p className="text-sm text-slate-600 dark:text-slate-400">React to messages with emojis, double-tap for ❤️</p>
+            </div>
+
+            {/* Group Chats */}
+            <div className="rounded-2xl p-6 bg-violet-50 dark:bg-slate-800 border border-violet-200 dark:border-violet-500/40 shadow-sm hover:shadow-md transition-shadow">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl mb-4 bg-violet-100 dark:bg-violet-500/20">
+                <Users className="h-6 w-6 text-violet-500" />
+              </div>
+              <h3 className="text-base font-semibold text-slate-900 dark:text-white mb-2">Group Chats</h3>
+              <p className="text-sm text-slate-600 dark:text-slate-400">Create groups and chat with everyone at once</p>
+            </div>
+
+            {/* Smart Notifications */}
+            <div className="rounded-2xl p-6 bg-blue-50 dark:bg-slate-800 border border-blue-200 dark:border-blue-500/40 shadow-sm hover:shadow-md transition-shadow">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl mb-4 bg-blue-100 dark:bg-blue-500/20">
+                <Bell className="h-6 w-6 text-blue-500" />
+              </div>
+              <h3 className="text-base font-semibold text-slate-900 dark:text-white mb-2">Smart Notifications</h3>
+              <p className="text-sm text-slate-600 dark:text-slate-400">Real-time unread badges keep you informed</p>
+            </div>
+
+            {/* Secure & Private */}
+            <div className="rounded-2xl p-6 bg-emerald-50 dark:bg-slate-800 border border-emerald-200 dark:border-emerald-500/40 shadow-sm hover:shadow-md transition-shadow">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl mb-4 bg-emerald-100 dark:bg-emerald-500/20">
+                <Shield className="h-6 w-6 text-emerald-500" />
+              </div>
+              <h3 className="text-base font-semibold text-slate-900 dark:text-white mb-2">Secure & Private</h3>
+              <p className="text-sm text-slate-600 dark:text-slate-400">Your conversations are private and secure</p>
+            </div>
+
+            {/* Online Presence */}
+            <div className="rounded-2xl p-6 bg-indigo-50 dark:bg-slate-800 border border-indigo-200 dark:border-indigo-500/40 shadow-sm hover:shadow-md transition-shadow">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl mb-4 bg-indigo-100 dark:bg-indigo-500/20">
+                <Globe className="h-6 w-6 text-indigo-500" />
+              </div>
+              <h3 className="text-base font-semibold text-slate-900 dark:text-white mb-2">Online Presence</h3>
+              <p className="text-sm text-slate-600 dark:text-slate-400">See who's online with live indicators</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="px-4 py-16 sm:py-20 bg-white dark:bg-slate-950">
+        <div className="max-w-4xl mx-auto">
+          <div className="rounded-3xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-8 sm:p-12">
+            <div className="text-center">
+              <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-2">
+                Start your first
+              </h2>
+              <h2 className="text-2xl sm:text-3xl font-bold mb-4">
+                <span className="gradient-text">conversation</span> today
+              </h2>
+              <p className="text-sm sm:text-base text-slate-500 dark:text-slate-400 max-w-md mx-auto mb-8">
+                Discover people, send messages, react with emojis — everything you love, in one place.
+              </p>
+
+              <button
+                onClick={() => setShowUsers(true)}
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-violet-600 to-purple-600 px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-violet-500/25 hover:shadow-violet-500/35 active:scale-[0.98] transition-all"
+              >
+                <Send className="h-4 w-4" />
+                <span>Start Chatting</span>
+                <ArrowRight className="h-4 w-4" />
+              </button>
+
+              {/* Stats Row */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-10">
+                {[
+                  { value: "0ms", label: "Latency", color: "text-amber-500" },
+                  { value: "∞", label: "Group Size", color: "text-violet-500" },
+                  { value: "100%", label: "Encrypted", color: "text-emerald-500" },
+                  { value: "24/7", label: "Available", color: "text-blue-500" },
+                ].map((stat, i) => (
+                  <div key={i} className="rounded-xl bg-white dark:bg-slate-800/50 border border-slate-100 dark:border-slate-700/50 p-4">
+                    <p className={cn("text-2xl sm:text-3xl font-bold", stat.color)}>{stat.value}</p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">{stat.label}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-slate-100 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 px-4 py-8">
-        <div className="max-w-4xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-violet-500 to-purple-600">
-              <MessageCircle className="h-3.5 w-3.5 text-white" />
+      <footer className="bg-white dark:bg-slate-950 border-t border-slate-200/60 dark:border-slate-800 px-4 sm:px-6 py-5">
+        <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+          {/* Left: Brand */}
+          <div className="flex items-center gap-2.5">
+            <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 shadow-md shadow-violet-500/20">
+              <MessageCircle className="h-4 w-4 text-white" />
             </div>
-            <span className="font-display text-sm font-bold text-slate-800 dark:text-white">Tars</span>
+            <span className="font-extrabold text-lg bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent">Tars Chat</span>
           </div>
-          <p className="text-xs text-slate-500">© {new Date().getFullYear()} Tars</p>
+          {/* Center: Developed by + Copyright */}
+          <div className="flex flex-col items-center gap-1">
+            <div className="flex items-center gap-1.5 text-sm font-medium text-slate-500 dark:text-slate-400">
+              <span>Developed with</span>
+              <Heart className="h-3.5 w-3.5 text-red-500 fill-red-500 animate-pulse" />
+              <span>by</span>
+              <span className="font-extrabold bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent">Tars</span>
+            </div>
+            <p className="text-[10px] text-slate-400 dark:text-slate-600">© {new Date().getFullYear()} Tars. All rights reserved.</p>
+          </div>
+          {/* Right: Spacer for desktop symmetry */}
+          <div className="hidden sm:block w-28" />
         </div>
       </footer>
     </div>
