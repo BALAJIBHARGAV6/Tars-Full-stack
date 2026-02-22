@@ -42,6 +42,7 @@ const DotLottieReact = dynamic(
 export default function HomePage() {
   const { user } = useUser();
   const [showUsers, setShowUsers] = useState(false);
+  const [isLoadingDiscover, setIsLoadingDiscover] = useState(false);
 
   const totalUnread = useQuery(
     api.unread.getTotalUnread,
@@ -62,7 +63,10 @@ export default function HomePage() {
         <div className="sticky top-0 z-50 flex justify-center px-4 py-4">
           <nav className="flex items-center justify-between w-full max-w-2xl rounded-full bg-white/90 dark:bg-slate-900/90 backdrop-blur-2xl shadow-lg shadow-black/5 dark:shadow-black/20 border border-slate-200/50 dark:border-slate-700/50 px-4 py-2.5">
             <button
-              onClick={() => setShowUsers(false)}
+              onClick={() => {
+                setIsLoadingDiscover(false);
+                setShowUsers(false);
+              }}
               className="flex items-center gap-2.5 pl-1 group"
             >
               <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-violet-500 via-purple-500 to-green-400 shadow-lg shadow-violet-500/20 group-hover:scale-105 transition-transform">
@@ -83,12 +87,12 @@ export default function HomePage() {
         <div className="flex-1 overflow-y-auto custom-scrollbar relative z-10">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
             
-            {/* Lottie Animation - Big Size */}
+            {/* Lottie Animation - Consistent Size */}
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              className="relative z-10 w-56 h-56 sm:w-72 sm:h-72 lg:w-96 lg:h-96 mx-auto mb-6"
+              className="relative z-10 w-48 h-48 sm:w-56 sm:h-56 lg:w-72 lg:h-72 mx-auto mb-6"
             >
               <div
                 className="absolute inset-[-40%] rounded-full bg-gradient-to-br from-violet-400/15 via-purple-400/8 to-emerald-400/8 blur-[80px]"
@@ -160,7 +164,7 @@ export default function HomePage() {
 
   // ============= FULL-SCREEN INTERACTION PAGE =============
   return (
-    <div className="flex flex-1 flex-col overflow-y-auto custom-scrollbar">
+    <div className="flex flex-1 flex-col overflow-y-auto custom-scrollbar gradient-bg-hero">
       {/* ========= FLOATING NAVBAR ========= */}
       <div className="sticky top-0 z-50 flex justify-center px-4 py-4">
         <nav className="flex items-center justify-between w-full max-w-2xl rounded-full bg-white/90 dark:bg-slate-900/90 backdrop-blur-2xl shadow-lg shadow-black/5 dark:shadow-black/20 border border-slate-200/50 dark:border-slate-700/50 px-4 py-2.5">
@@ -204,12 +208,12 @@ export default function HomePage() {
           />
         </div>
 
-        {/* Lottie — bigger */}
+        {/* Lottie — consistent size */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="relative z-10 w-72 h-72 sm:w-[420px] sm:h-[420px] lg:w-[580px] lg:h-[580px] mb-4 sm:mb-6"
+          className="relative z-10 w-56 h-56 sm:w-72 sm:h-72 lg:w-96 lg:h-96 mb-4 sm:mb-6"
         >
           <div
             className="absolute inset-[-40%] rounded-full bg-gradient-to-br from-violet-400/15 via-purple-400/8 to-emerald-400/8 blur-[80px]"
@@ -254,13 +258,30 @@ export default function HomePage() {
         >
           {/* Primary Button - Discover People */}
           <button
-            onClick={() => setShowUsers(true)}
-            className="group relative flex w-full sm:w-auto items-center justify-center gap-2.5 rounded-2xl bg-gradient-to-r from-violet-600 via-purple-600 to-violet-700 px-8 py-3.5 text-sm font-semibold text-white shadow-xl shadow-violet-500/25 hover:shadow-violet-500/40 active:scale-[0.97] transition-all duration-200 overflow-hidden"
+            onClick={() => {
+              setIsLoadingDiscover(true);
+              // Small delay to show loading, then navigate
+              setTimeout(() => setShowUsers(true), 100);
+            }}
+            disabled={isLoadingDiscover}
+            className="group relative flex w-full sm:w-auto items-center justify-center gap-2.5 rounded-2xl bg-gradient-to-r from-violet-600 via-purple-600 to-violet-700 px-8 py-3.5 text-sm font-semibold text-white shadow-xl shadow-violet-500/25 hover:shadow-violet-500/40 active:scale-[0.97] transition-all duration-200 overflow-hidden disabled:opacity-80 disabled:cursor-wait"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
-            <Users className="h-4 w-4 relative z-10" />
-            <span className="relative z-10">Discover People</span>
-            <ArrowRight className="h-4 w-4 relative z-10 group-hover:translate-x-0.5 transition-transform" />
+            {isLoadingDiscover ? (
+              <>
+                <svg className="animate-spin h-4 w-4 relative z-10" viewBox="0 0 24 24" fill="none">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                </svg>
+                <span className="relative z-10">Loading...</span>
+              </>
+            ) : (
+              <>
+                <Users className="h-4 w-4 relative z-10" />
+                <span className="relative z-10">Discover People</span>
+                <ArrowRight className="h-4 w-4 relative z-10 group-hover:translate-x-0.5 transition-transform" />
+              </>
+            )}
           </button>
 
           {/* Secondary Button - My Messages */}

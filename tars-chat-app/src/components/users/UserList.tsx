@@ -55,9 +55,16 @@ export default function UserList() {
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
       {/* Search bar */}
-      <UserSearch onSearch={setSearchQuery} />
+      <div className="relative">
+        <UserSearch onSearch={setSearchQuery} />
+        {searchQuery && (
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-2 ml-1">
+            Showing results for “<span className="font-medium text-violet-600 dark:text-violet-400">{searchQuery}</span>”
+          </p>
+        )}
+      </div>
 
       {/* User grid */}
       {filteredUsers.length === 0 ? (
@@ -82,16 +89,16 @@ export default function UserList() {
             hidden: { opacity: 0 },
             show: {
               opacity: 1,
-              transition: { staggerChildren: 0.05 },
+              transition: { staggerChildren: 0.06 },
             },
           }}
-          className="grid gap-3 sm:grid-cols-2"
+          className="flex flex-col gap-3"
         >
           {filteredUsers.map((user) => (
             <motion.div
               key={user._id}
               variants={{
-                hidden: { opacity: 0, y: 10 },
+                hidden: { opacity: 0, y: 15 },
                 show: { opacity: 1, y: 0 },
               }}
             >
