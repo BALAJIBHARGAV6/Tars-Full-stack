@@ -42,31 +42,52 @@ const DotLottieReact = dynamic(
 export default function HomePage() {
   const { user } = useUser();
   const [showUsers, setShowUsers] = useState(false);
-  const [isLoadingDiscover, setIsLoadingDiscover] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   const totalUnread = useQuery(
     api.unread.getTotalUnread,
     user ? { userId: user.id } : "skip"
   );
 
+  // Loading Transition Screen
+  if (isTransitioning) {
+    return (
+      <div className="flex flex-1 flex-col items-center justify-center gradient-bg-hero">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="flex flex-col items-center gap-6"
+        >
+          {/* Animated Logo */}
+          <div className="relative">
+            <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-violet-500 to-purple-600 blur-xl opacity-40 animate-pulse" />
+            <div className="relative flex h-20 w-20 items-center justify-center rounded-3xl bg-gradient-to-br from-violet-500 via-purple-500 to-green-400 shadow-2xl">
+              <Users className="h-10 w-10 text-white" />
+            </div>
+          </div>
+          
+          {/* Loading spinner */}
+          <div className="flex items-center gap-3">
+            <svg className="animate-spin h-5 w-5 text-violet-600 dark:text-violet-400" viewBox="0 0 24 24" fill="none">
+              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+            </svg>
+            <span className="text-base font-medium text-slate-600 dark:text-slate-300">Discovering people...</span>
+          </div>
+        </motion.div>
+      </div>
+    );
+  }
+
   // Discover Users View - Premium Redesign
   if (showUsers) {
     return (
       <div className="flex flex-1 flex-col overflow-hidden gradient-bg-hero">
-        {/* Ambient background effects */}
-        <div className="fixed inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-violet-300/20 dark:bg-violet-500/10 rounded-full blur-[150px]" />
-          <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-emerald-300/15 dark:bg-emerald-500/8 rounded-full blur-[130px]" />
-        </div>
-
         {/* Clean Navbar */}
         <div className="sticky top-0 z-50 flex justify-center px-4 py-4">
-          <nav className="flex items-center justify-between w-full max-w-2xl rounded-full bg-white/90 dark:bg-slate-900/90 backdrop-blur-2xl shadow-lg shadow-black/5 dark:shadow-black/20 border border-slate-200/50 dark:border-slate-700/50 px-4 py-2.5">
+          <nav className="flex items-center justify-between w-full max-w-2xl rounded-full bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl shadow-lg shadow-black/5 dark:shadow-black/20 border border-slate-200/50 dark:border-slate-700/50 px-4 py-2.5">
             <button
-              onClick={() => {
-                setIsLoadingDiscover(false);
-                setShowUsers(false);
-              }}
+              onClick={() => setShowUsers(false)}
               className="flex items-center gap-2.5 pl-1 group"
             >
               <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-violet-500 via-purple-500 to-green-400 shadow-lg shadow-violet-500/20 group-hover:scale-105 transition-transform">
@@ -85,53 +106,26 @@ export default function HomePage() {
 
         {/* Main Content */}
         <div className="flex-1 overflow-y-auto custom-scrollbar relative z-10">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
             
-            {/* Lottie Animation - Consistent Size */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              className="relative z-10 w-48 h-48 sm:w-56 sm:h-56 lg:w-72 lg:h-72 mx-auto mb-6"
-            >
-              <div
-                className="absolute inset-[-40%] rounded-full bg-gradient-to-br from-violet-400/15 via-purple-400/8 to-emerald-400/8 blur-[80px]"
-                style={{ animation: "pulse 6s ease-in-out infinite" }}
-              />
-              <div className="relative w-full h-full drop-shadow-2xl">
-                <DotLottieReact
-                  src="https://lottie.host/59f5c75b-3a65-437e-9bad-1aa8785709b7/1jVgovl86G.lottie"
-                  loop
-                  autoplay
-                  style={{ width: "100%", height: "100%" }}
-                />
-              </div>
-            </motion.div>
-
             {/* Hero Header Section */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="text-center mb-10"
-            >
-              <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 dark:text-white mb-4 tracking-tight">
+            <div className="text-center mb-8">
+              {/* Icon */}
+              <div className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-violet-500 via-purple-500 to-violet-600 shadow-xl shadow-violet-500/25 mb-5">
+                <Users className="h-8 w-8 text-white" />
+              </div>
+              <h1 className="font-display text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white mb-3 tracking-tight">
                 Discover <span className="gradient-text">People</span>
               </h1>
-              <p className="font-sans text-base sm:text-lg text-slate-500 dark:text-slate-400 max-w-md mx-auto">
+              <p className="font-sans text-sm sm:text-base text-slate-500 dark:text-slate-400 max-w-sm mx-auto">
                 Find amazing people and start <span className="text-violet-600 dark:text-violet-400 font-semibold">meaningful</span> conversations
               </p>
-            </motion.div>
+            </div>
 
             {/* User List with enhanced styling */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="bg-white/80 dark:bg-slate-800/60 backdrop-blur-xl rounded-3xl border border-slate-200/80 dark:border-slate-700/50 shadow-xl shadow-slate-200/50 dark:shadow-black/20 p-6 sm:p-8"
-            >
+            <div className="bg-white dark:bg-slate-800/80 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-lg p-5 sm:p-6">
               <UserList />
-            </motion.div>
+            </div>
           </div>
 
           {/* Footer in Discover Page */}
@@ -193,49 +187,23 @@ export default function HomePage() {
 
       {/* ========= HERO SECTION ========= */}
       <section className="relative flex flex-col items-center justify-center px-4 sm:px-6 pt-4 pb-12 sm:pt-6 sm:pb-16 min-h-[calc(100dvh-72px)] overflow-hidden gradient-bg-hero">
-        {/* Ambient background */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute top-[10%] left-[5%] w-[500px] h-[500px] bg-violet-400/15 dark:bg-violet-500/20 rounded-full blur-[120px]" />
-          <div className="absolute bottom-[10%] right-[5%] w-[600px] h-[600px] bg-purple-400/12 dark:bg-purple-500/15 rounded-full blur-[140px]" />
-          <div className="absolute top-[40%] left-[50%] -translate-x-1/2 w-[400px] h-[400px] bg-emerald-400/8 dark:bg-emerald-500/10 rounded-full blur-[100px]" />
-          {/* Dot grid */}
-          <div
-            className="absolute inset-0 opacity-[0.02] dark:opacity-[0.04]"
-            style={{
-              backgroundImage: "radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)",
-              backgroundSize: "32px 32px",
-            }}
+        {/* Simple background gradient */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-violet-100/40 via-transparent to-purple-100/30 dark:from-violet-950/30 dark:to-purple-950/20" />
+        </div>
+
+        {/* Lottie */}
+        <div className="relative z-10 w-56 h-56 sm:w-72 sm:h-72 lg:w-80 lg:h-80 mb-4 sm:mb-6">
+          <DotLottieReact
+            src="https://lottie.host/3aa6ca0a-f9d7-4bf0-88ff-cd7b2dd01b2c/YobNNqyHC5.lottie"
+            loop
+            autoplay
+            style={{ width: "100%", height: "100%" }}
           />
         </div>
 
-        {/* Lottie — consistent size */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="relative z-10 w-56 h-56 sm:w-72 sm:h-72 lg:w-96 lg:h-96 mb-4 sm:mb-6"
-        >
-          <div
-            className="absolute inset-[-40%] rounded-full bg-gradient-to-br from-violet-400/15 via-purple-400/8 to-emerald-400/8 blur-[80px]"
-            style={{ animation: "pulse 6s ease-in-out infinite" }}
-          />
-          <div className="relative w-full h-full drop-shadow-2xl">
-            <DotLottieReact
-              src="https://lottie.host/3aa6ca0a-f9d7-4bf0-88ff-cd7b2dd01b2c/YobNNqyHC5.lottie"
-              loop
-              autoplay
-              style={{ width: "100%", height: "100%" }}
-            />
-          </div>
-        </motion.div>
-
         {/* Title */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-          className="relative z-10 text-center mb-8 px-2"
-        >
+        <div className="relative z-10 text-center mb-8 px-2">
           <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white leading-[1.15] tracking-tight">
             <span className="gradient-text">Tars</span> — Where <span className="gradient-text">chats</span>
             <br />
@@ -247,41 +215,25 @@ export default function HomePage() {
             <span className="font-semibold text-slate-700 dark:text-slate-300"> design</span>, and
             <span className="font-semibold text-slate-700 dark:text-slate-300"> privacy</span>.
           </p>
-        </motion.div>
+        </div>
 
-        {/* CTA Buttons - Gradient Style */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
-          className="relative z-10 flex flex-col sm:flex-row items-center gap-4 sm:gap-5 w-full max-w-md px-4"
-        >
+        {/* CTA Buttons */}
+        <div className="relative z-10 flex flex-col sm:flex-row items-center gap-4 sm:gap-5 w-full max-w-md px-4">
           {/* Primary Button - Discover People */}
           <button
             onClick={() => {
-              setIsLoadingDiscover(true);
-              // Small delay to show loading, then navigate
-              setTimeout(() => setShowUsers(true), 100);
+              setIsTransitioning(true);
+              setTimeout(() => {
+                setShowUsers(true);
+                setIsTransitioning(false);
+              }, 800);
             }}
-            disabled={isLoadingDiscover}
-            className="group relative flex w-full sm:w-auto items-center justify-center gap-2.5 rounded-2xl bg-gradient-to-r from-violet-600 via-purple-600 to-violet-700 px-8 py-3.5 text-sm font-semibold text-white shadow-xl shadow-violet-500/25 hover:shadow-violet-500/40 active:scale-[0.97] transition-all duration-200 overflow-hidden disabled:opacity-80 disabled:cursor-wait"
+            className="group relative flex w-full sm:w-auto items-center justify-center gap-2.5 rounded-2xl bg-gradient-to-r from-violet-600 via-purple-600 to-violet-700 px-8 py-3.5 text-sm font-semibold text-white shadow-xl shadow-violet-500/25 hover:shadow-violet-500/40 active:scale-[0.97] transition-all duration-200 overflow-hidden"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
-            {isLoadingDiscover ? (
-              <>
-                <svg className="animate-spin h-4 w-4 relative z-10" viewBox="0 0 24 24" fill="none">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                </svg>
-                <span className="relative z-10">Loading...</span>
-              </>
-            ) : (
-              <>
-                <Users className="h-4 w-4 relative z-10" />
-                <span className="relative z-10">Discover People</span>
-                <ArrowRight className="h-4 w-4 relative z-10 group-hover:translate-x-0.5 transition-transform" />
-              </>
-            )}
+            <Users className="h-4 w-4 relative z-10" />
+            <span className="relative z-10">Discover People</span>
+            <ArrowRight className="h-4 w-4 relative z-10 group-hover:translate-x-0.5 transition-transform" />
           </button>
 
           {/* Secondary Button - My Messages */}
@@ -297,7 +249,7 @@ export default function HomePage() {
               </span>
             )}
           </Link>
-        </motion.div>
+        </div>
       </section>
 
       {/* ========= FEATURES SECTION ========= */}

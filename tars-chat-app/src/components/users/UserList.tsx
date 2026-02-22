@@ -1,9 +1,8 @@
 /* ========================================================
-   USER LIST - Grid of All Registered Users
+   USER LIST - All Registered Users
    
    Fetches all users from Convex, excludes the current user,
-   and displays them in a searchable grid of UserCards.
-   Includes staggered fade-in animations.
+   and displays them in a searchable list of UserCards.
    ======================================================== */
 
 "use client";
@@ -12,7 +11,6 @@ import { useState, useMemo } from "react";
 import { useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { useUser } from "@clerk/nextjs";
-import { motion } from "framer-motion";
 import { Users, Search } from "lucide-react";
 import UserCard from "./UserCard";
 import UserSearch from "./UserSearch";
@@ -82,30 +80,11 @@ export default function UserList() {
           />
         )
       ) : (
-        <motion.div
-          initial="hidden"
-          animate="show"
-          variants={{
-            hidden: { opacity: 0 },
-            show: {
-              opacity: 1,
-              transition: { staggerChildren: 0.06 },
-            },
-          }}
-          className="flex flex-col gap-3"
-        >
+        <div className="flex flex-col gap-2">
           {filteredUsers.map((user) => (
-            <motion.div
-              key={user._id}
-              variants={{
-                hidden: { opacity: 0, y: 15 },
-                show: { opacity: 1, y: 0 },
-              }}
-            >
-              <UserCard user={user} />
-            </motion.div>
+            <UserCard key={user._id} user={user} />
           ))}
-        </motion.div>
+        </div>
       )}
     </div>
   );
