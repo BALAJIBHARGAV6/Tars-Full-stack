@@ -38,7 +38,7 @@ export default function TypingIndicator({
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: 10 }}
         transition={{ duration: 0.15 }}
-        className="flex items-center gap-2 px-3 sm:px-4 py-2"
+        className="flex items-center gap-2 px-1 py-2"
       >
         {/* Small avatar of the typing user with story ring */}
         <div className="rounded-full bg-gradient-to-tr from-amber-400 via-pink-500 to-violet-600 p-0.5 shrink-0">
@@ -56,8 +56,8 @@ export default function TypingIndicator({
         </div>
 
         {/* Typing bubble with animated dots */}
-        <div className="flex items-center gap-1.5 rounded-2xl rounded-bl-md bg-gradient-to-r from-slate-100 to-slate-50 px-3 sm:px-4 py-2 shadow-sm">
-          <span className="text-[11px] sm:text-xs font-medium text-slate-500 truncate max-w-32 sm:max-w-none">{typingText}</span>
+        <div className="flex items-center gap-1.5 rounded-2xl rounded-bl-md bg-gradient-to-r from-slate-100 to-slate-50 dark:from-slate-800 dark:to-slate-800/80 px-3 sm:px-4 py-2 shadow-sm">
+          <span className="text-[11px] sm:text-xs font-medium text-slate-500 dark:text-slate-400 truncate max-w-32 sm:max-w-none">{typingText}</span>
           <div className="flex items-center gap-1 ml-1 shrink-0">
             {[0, 1, 2].map((i) => (
               <motion.span

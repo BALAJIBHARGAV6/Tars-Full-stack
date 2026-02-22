@@ -165,12 +165,12 @@ export default function MessageInput({
           className={cn(
             "flex h-10 w-10 shrink-0 items-center justify-center rounded-full transition-all duration-200",
             showEmojis
-              ? "text-violet-500 dark:text-violet-400 bg-violet-50 dark:bg-violet-900/30"
-              : "text-slate-400 dark:text-slate-500 hover:text-violet-500 dark:hover:text-violet-400 hover:bg-slate-100 dark:hover:bg-slate-800"
+              ? "text-violet-500 dark:text-violet-400 bg-violet-50 dark:bg-violet-900/30 ring-2 ring-violet-200 dark:ring-violet-700"
+              : "text-slate-500 dark:text-slate-300 hover:text-violet-500 dark:hover:text-violet-400 hover:bg-slate-100 dark:hover:bg-slate-800 bg-slate-50 dark:bg-slate-800"
           )}
           title="Emojis"
         >
-          <Smile className="h-5 w-5" />
+          <Smile className="h-6 w-6" />
         </button>
 
         {/* Textarea */}

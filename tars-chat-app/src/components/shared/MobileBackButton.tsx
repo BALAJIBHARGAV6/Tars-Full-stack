@@ -18,12 +18,8 @@ export default function MobileBackButton({ className }: MobileBackButtonProps) {
   const router = useRouter();
 
   const handleBack = () => {
-    // Use browser back if possible, otherwise go to home
-    if (window.history.length > 1) {
-      router.back();
-    } else {
-      router.push("/");
-    }
+    // Always go to the home/discover page
+    router.push("/");
   };
 
   return (
