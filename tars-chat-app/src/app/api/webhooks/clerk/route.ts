@@ -18,10 +18,14 @@ import { WebhookEvent } from "@clerk/nextjs/server";
 import { ConvexHttpClient } from "convex/browser";
 import { api } from "../../../../../convex/_generated/api";
 
-// Create a Convex HTTP client for server-side API calls
-const convex = new ConvexHttpClient(
-  process.env.NEXT_PUBLIC_CONVEX_URL as string
-);
+// Lazy-init Convex client to avoid crashing at build time when env vars aren't set
+let _convex: ConvexHttpClient | null = null;
+function getConvex() {
+  if (!_convex) {
+    _convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL as string);
+  }
+  return _convex;
+}
 
 export async function POST(req: Request) {
   const WEBHOOK_SECRET = process.env.CLERK_WEBHOOK_SECRET;
@@ -90,7 +94,7 @@ async function handleWebhookEvent(evt: WebhookEvent | Record<string, unknown>) {
     const avatarUrl = userData.image_url || "";
 
     // Sync to Convex database using our createOrUpdateUser mutation
-    await convex.mutation(api.users.createOrUpdateUser, {
+    await getConvex().mutation(api.users.createOrUpdateUser, {
       clerkId,
       name,
       email,
