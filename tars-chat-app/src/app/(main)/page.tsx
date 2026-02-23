@@ -121,7 +121,7 @@ export default function HomePage() {
             {/* Lottie Animation */}
             <div className="w-44 h-44 sm:w-52 sm:h-52 mx-auto mb-6">
               <DotLottieReact
-                src="https://lottie.host/59f5c75b-3a65-437e-9bad-1aa8785709b7/1jVgovl86G.lottie"
+                src="https://lottie.host/3e3bd49d-91a3-4411-b68d-f20c8a235bf5/1a3pyKm0KM.lottie"
                 loop
                 autoplay
                 style={{ width: "100%", height: "100%" }}
