@@ -124,7 +124,7 @@ export default function HomePage() {
             </div>
 
             {/* Conversations List */}
-            <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden">
+            <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden min-h-[400px]">
               <ConversationList />
             </div>
           </div>
