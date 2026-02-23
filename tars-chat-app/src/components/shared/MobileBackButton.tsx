@@ -18,13 +18,8 @@ export default function MobileBackButton({ className }: MobileBackButtonProps) {
   const router = useRouter();
 
   const handleBack = () => {
-    // Go back to the previous page (conversation list / sidebar)
-    // Falls back to home only if there's no browser history
-    if (window.history.length > 1) {
-      router.back();
-    } else {
-      router.push("/");
-    }
+    // Always navigate to the Discover People page
+    router.push("/?view=discover");
   };
 
   return (

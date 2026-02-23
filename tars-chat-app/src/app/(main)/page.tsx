@@ -8,9 +8,10 @@
 
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import {
   MessageCircle,
   Users,
@@ -38,10 +39,24 @@ const DotLottieReact = dynamic(
 
 export default function HomePage() {
   const { user } = useUser();
-  const [showUsers, setShowUsers] = useState(false);
-  const [showMessages, setShowMessages] = useState(false);
+  const searchParams = useSearchParams();
+  const viewParam = searchParams.get("view"); // ?view=discover or ?view=messages
+
+  const [showUsers, setShowUsers] = useState(viewParam === "discover");
+  const [showMessages, setShowMessages] = useState(viewParam === "messages");
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [transitionTarget, setTransitionTarget] = useState<"users" | "messages">("users");
+
+  // Sync state when URL search params change (e.g. back button navigation)
+  useEffect(() => {
+    if (viewParam === "discover") {
+      setShowUsers(true);
+      setShowMessages(false);
+    } else if (viewParam === "messages") {
+      setShowUsers(false);
+      setShowMessages(true);
+    }
+  }, [viewParam]);
 
   const totalUnread = useQuery(
     api.unread.getTotalUnread,
@@ -83,7 +98,7 @@ export default function HomePage() {
         <div className="sticky top-0 z-50 flex justify-center px-4 py-3">
           <nav className="flex items-center justify-between w-full max-w-2xl rounded-full bg-white dark:bg-slate-900 shadow-md border border-slate-200 dark:border-slate-800 px-4 py-2.5">
             <button
-              onClick={() => setShowMessages(false)}
+              onClick={() => { setShowMessages(false); setShowUsers(true); }}
               className="flex items-center gap-2.5 pl-1"
             >
               <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-violet-500 to-purple-600">
