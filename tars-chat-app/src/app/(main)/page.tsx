@@ -26,6 +26,7 @@ import { useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { useUser, UserButton } from "@clerk/nextjs";
 import UserList from "@/components/users/UserList";
+import ConversationList from "@/components/conversations/ConversationList";
 import ThemeToggle from "@/components/shared/ThemeToggle";
 import { cn } from "@/lib/utils";
 
@@ -38,7 +39,9 @@ const DotLottieReact = dynamic(
 export default function HomePage() {
   const { user } = useUser();
   const [showUsers, setShowUsers] = useState(false);
+  const [showMessages, setShowMessages] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [transitionTarget, setTransitionTarget] = useState<"users" | "messages">("users");
 
   const totalUnread = useQuery(
     api.unread.getTotalUnread,
@@ -64,7 +67,89 @@ export default function HomePage() {
             </div>
           </div>
           
-          <p className="text-sm font-medium text-slate-500 dark:text-slate-400">Loading people...</p>
+          <p className="text-sm font-medium text-slate-500 dark:text-slate-400">
+            {transitionTarget === "messages" ? "Loading messages..." : "Loading people..."}
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  // ============= MY MESSAGES VIEW =============
+  if (showMessages) {
+    return (
+      <div className="flex flex-1 flex-col overflow-hidden bg-slate-50 dark:bg-slate-950">
+        {/* Navbar */}
+        <div className="sticky top-0 z-50 flex justify-center px-4 py-3">
+          <nav className="flex items-center justify-between w-full max-w-2xl rounded-full bg-white dark:bg-slate-900 shadow-md border border-slate-200 dark:border-slate-800 px-4 py-2.5">
+            <button
+              onClick={() => setShowMessages(false)}
+              className="flex items-center gap-2.5 pl-1"
+            >
+              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-violet-500 to-purple-600">
+                <MessageCircle className="h-4 w-4 text-white" />
+              </div>
+              <span className="font-display text-lg font-bold gradient-text">
+                Tars
+              </span>
+            </button>
+            <div className="flex items-center gap-2 pr-1">
+              <ThemeToggle />
+              <UserButton afterSignOutUrl="/sign-in" />
+            </div>
+          </nav>
+        </div>
+
+        {/* Main Content */}
+        <div className="flex-1 overflow-y-auto">
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
+            {/* Lottie Animation */}
+            <div className="w-44 h-44 sm:w-52 sm:h-52 mx-auto mb-6">
+              <DotLottieReact
+                src="https://lottie.host/59f5c75b-3a65-437e-9bad-1aa8785709b7/1jVgovl86G.lottie"
+                loop
+                autoplay
+                style={{ width: "100%", height: "100%" }}
+              />
+            </div>
+
+            {/* Header */}
+            <div className="text-center mb-8">
+              <h1 className="font-display text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-2">
+                My <span className="gradient-text">Messages</span>
+              </h1>
+              <p className="text-sm text-slate-500 dark:text-slate-400">
+                Your conversations — tap any chat to continue
+              </p>
+            </div>
+
+            {/* Conversations List */}
+            <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden">
+              <ConversationList />
+            </div>
+          </div>
+
+          {/* Footer */}
+          <footer className="bg-white dark:bg-slate-900 border-t border-slate-200/60 dark:border-slate-800 px-4 py-5 mt-8">
+            <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="flex items-center gap-2">
+                <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-violet-500 to-purple-600 shadow-md shadow-violet-500/20">
+                  <MessageCircle className="h-3.5 w-3.5 text-white" />
+                </div>
+                <span className="font-extrabold text-base bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent">Tars Chat</span>
+              </div>
+              <div className="flex flex-col items-center gap-1">
+                <div className="flex items-center gap-1.5 text-sm font-medium text-slate-500 dark:text-slate-400">
+                  <span>Developed with</span>
+                  <Heart className="h-3.5 w-3.5 text-red-500 fill-red-500 animate-pulse" />
+                  <span>by</span>
+                  <span className="font-extrabold bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent">Tars</span>
+                </div>
+                <p className="text-[10px] text-slate-400 dark:text-slate-600">© {new Date().getFullYear()} Tars. All rights reserved.</p>
+              </div>
+              <div className="hidden sm:block w-24" />
+            </div>
+          </footer>
         </div>
       </div>
     );
@@ -207,6 +292,7 @@ export default function HomePage() {
         <div className="flex flex-col sm:flex-row items-center gap-4 w-full max-w-sm px-4">
           <button
             onClick={() => {
+              setTransitionTarget("users");
               setIsTransitioning(true);
               setTimeout(() => {
                 setShowUsers(true);
@@ -220,8 +306,15 @@ export default function HomePage() {
             <ArrowRight className="h-4 w-4" />
           </button>
 
-          <Link
-            href="/"
+          <button
+            onClick={() => {
+              setTransitionTarget("messages");
+              setIsTransitioning(true);
+              setTimeout(() => {
+                setShowMessages(true);
+                setIsTransitioning(false);
+              }, 600);
+            }}
             className="flex w-full sm:w-auto items-center justify-center gap-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-6 py-3 text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700 active:scale-[0.98] transition-all"
           >
             <MessageCircle className="h-4 w-4" />
@@ -231,7 +324,7 @@ export default function HomePage() {
                 {totalUnread}
               </span>
             )}
-          </Link>
+          </button>
         </div>
       </section>
 
